@@ -4,7 +4,7 @@ import domain.Row;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BoardGenerator {
+ public class BoardGenerator {
 
 
     public static List<Board> generate(){
