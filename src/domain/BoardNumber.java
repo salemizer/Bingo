@@ -1,16 +1,17 @@
+package domain;
 
-class BoardNumber {
+public class BoardNumber {
 
     private int number;
     private boolean marked;
 
     private Row row;
 
+
     public BoardNumber(int number, boolean marked){
         this.number = number;
         this.marked = marked;
     }
-
 
     public void setNumber(int number){
         this.number = number;

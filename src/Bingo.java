@@ -1,262 +1,28 @@
+import domain.Board;
+import domain.BoardNumber;
+import domain.Row;
 import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
-import java.util.Set;
-
-import javax.swing.JTextPane;
 
 
 public class Bingo {
 
-
-
-    static List<Integer> draw_numbers = null;
-    static List<Board> board_list = null;
-
-
+     List<Integer> draw_numbers = null;
+     List<Board> board_list = null;
     // construct bingo board
     public Bingo(){
 
-        Board board1 = new Board();
-        Board board2 = new Board();
-        Board board3 = new Board();
-
-        initBoardOne(board1);
-         initBoardTwo(board2);
-        initBoardThree(board3);
-
-        board_list = new ArrayList<Board>();
-
-        board_list.add(board1);
-        board_list.add(board2);
-        board_list.add(board3);
-
+        // returns list of Board
+        board_list = BoardGenerator.generate();
         initDrawNumbers();
 
     }
 
 
+     void initDrawNumbers(){
 
-    static Board initBoardOne(Board board){
-
-        board.setBoardId("One");
-
-        List<BoardNumber> list  = new ArrayList<BoardNumber>();
-        list.add(new BoardNumber(22, false));
-        list.add(new BoardNumber(13, false));
-        list.add(new BoardNumber(17, false));
-        list.add(new BoardNumber(11, false));
-        list.add(new BoardNumber(0, false));
-
-        Row row1 = new Row(list);
-        row1.setBoard(board);
-
-
-        list = new ArrayList<BoardNumber>();
-        list.add(new BoardNumber(8, false));
-        list.add(new BoardNumber(2, false));
-        list.add(new BoardNumber(23, false));
-        list.add(new BoardNumber(4, false));
-        list.add(new BoardNumber(24, false));
-
-        Row row2 = new Row(list);
-        row2.setBoard(board);
-
-
-        list = new ArrayList<BoardNumber>();
-        list.add(new BoardNumber(21, false));
-        list.add(new BoardNumber(9, false));
-        list.add(new BoardNumber(14, false));
-        list.add(new BoardNumber(16, false));
-        list.add(new BoardNumber(7, false));
-
-        Row row3 = new Row(list);
-        row3.setBoard(board);
-
-        list = new ArrayList<BoardNumber>();
-        list.add(new BoardNumber(6, false));
-        list.add(new BoardNumber(10, false));
-        list.add(new BoardNumber(3, false));
-        list.add(new BoardNumber(18, false));
-        list.add(new BoardNumber(5, false));
-
-        Row row4 = new Row(list);
-        row4.setBoard(board);
-
-        list = new ArrayList<BoardNumber>();
-        list.add(new BoardNumber(1, false));
-        list.add(new BoardNumber(12, false));
-        list.add(new BoardNumber(20, false));
-        list.add(new BoardNumber(15, false));
-        list.add(new BoardNumber(19, false));
-
-        Row row5 = new Row(list);
-        row5.setBoard(board);
-
-
-        // add rows to the board
-        List<Row> rowList = new ArrayList<Row>();
-        rowList.add(row1);
-        rowList.add(row2);
-        rowList.add(row3);
-        rowList.add(row4);
-        rowList.add(row5);
-
-        board.setRowList(rowList);
-
-        return board;
-    }
-
-
-
-    static Board initBoardTwo(Board board){
-
-        board.setBoardId("Two");
-
-        List<BoardNumber> list  = new ArrayList<BoardNumber>();
-        list.add(new BoardNumber(3, false));
-        list.add(new BoardNumber(15, false));
-        list.add(new BoardNumber(0, false));
-        list.add(new BoardNumber(2, false));
-        list.add(new BoardNumber(22, false));
-
-        Row row1 = new Row(list);
-        row1.setBoard(board);
-
-
-        list = new ArrayList<BoardNumber>();
-        list.add(new BoardNumber(9, false));
-        list.add(new BoardNumber(18, false));
-        list.add(new BoardNumber(13, false));
-        list.add(new BoardNumber(17, false));
-        list.add(new BoardNumber(5, false));
-
-        Row row2 = new Row(list);
-        row2.setBoard(board);
-
-
-        list = new ArrayList<BoardNumber>();
-        list.add(new BoardNumber(19, false));
-        list.add(new BoardNumber(8, false));
-        list.add(new BoardNumber(7, false));
-        list.add(new BoardNumber(25, false));
-        list.add(new BoardNumber(23, false));
-
-        Row row3 = new Row(list);
-        row3.setBoard(board);
-
-        list = new ArrayList<BoardNumber>();
-        list.add(new BoardNumber(20, false));
-        list.add(new BoardNumber(11, false));
-        list.add(new BoardNumber(10, false));
-        list.add(new BoardNumber(24, false));
-        list.add(new BoardNumber(4, false));
-
-        Row row4 = new Row(list);
-        row4.setBoard(board);
-
-        list = new ArrayList<BoardNumber>();
-        list.add(new BoardNumber(14, false));
-        list.add(new BoardNumber(21, false));
-        list.add(new BoardNumber(16, false));
-        list.add(new BoardNumber(12, false));
-        list.add(new BoardNumber(6, false));
-
-        Row row5 = new Row(list);
-        row5.setBoard(board);
-
-
-        // add rows to the board
-        List<Row> rowList = new ArrayList<Row>();
-        rowList.add(row1);
-        rowList.add(row2);
-        rowList.add(row3);
-        rowList.add(row4);
-        rowList.add(row5);
-
-        board.setRowList(rowList);
-
-        return board;
-    }
-
-
-
-    static Board initBoardThree(Board board){
-
-        board.setBoardId("Three");
-
-        List<BoardNumber> list  = new ArrayList<BoardNumber>();
-        list.add(new BoardNumber(14, false));
-        list.add(new BoardNumber(21, false));
-        list.add(new BoardNumber(17, false));
-        list.add(new BoardNumber(24, false));
-        list.add(new BoardNumber(4, false));
-
-        Row row1 = new Row(list);
-        row1.setBoard(board);
-
-
-        list = new ArrayList<BoardNumber>();
-        list.add(new BoardNumber(10, false));
-        list.add(new BoardNumber(16, false));
-        list.add(new BoardNumber(15, false));
-        list.add(new BoardNumber(9, false));
-        list.add(new BoardNumber(19, false));
-
-        Row row2 = new Row(list);
-        row2.setBoard(board);
-
-
-        list = new ArrayList<BoardNumber>();
-        list.add(new BoardNumber(18, false));
-        list.add(new BoardNumber(8, false));
-        list.add(new BoardNumber(23, false));
-        list.add(new BoardNumber(26, false));
-        list.add(new BoardNumber(20, false));
-
-        Row row3 = new Row(list);
-        row3.setBoard(board);
-
-        list = new ArrayList<BoardNumber>();
-        list.add(new BoardNumber(22, false));
-        list.add(new BoardNumber(11, false));
-        list.add(new BoardNumber(13, false));
-        list.add(new BoardNumber(6, false));
-        list.add(new BoardNumber(5, false));
-
-        Row row4 = new Row(list);
-        row4.setBoard(board);
-
-        list = new ArrayList<BoardNumber>();
-        list.add(new BoardNumber(2, false));
-        list.add(new BoardNumber(0, false));
-        list.add(new BoardNumber(12, false));
-        list.add(new BoardNumber(3, false));
-        list.add(new BoardNumber(7, false));
-
-        Row row5 = new Row(list);
-        row5.setBoard(board);
-
-
-        // add rows to the board
-        List<Row> rowList = new ArrayList<Row>();
-        rowList.add(row1);
-        rowList.add(row2);
-        rowList.add(row3);
-        rowList.add(row4);
-        rowList.add(row5);
-
-        board.setRowList(rowList);
-
-        return board;
-    }
-
-
-    static void initDrawNumbers(){
-
-        draw_numbers = new ArrayList<Integer>();
+        this.draw_numbers = new ArrayList<Integer>();
         // draw numbers
         draw_numbers.add(7);
         draw_numbers.add(4);
@@ -286,89 +52,6 @@ public class Bingo {
         draw_numbers.add(26);
         draw_numbers.add(1);
     }
-
-
-    static void initBoard(List<Board>board_list){
-
-        if(board_list.size() > 0){
-
-            for(int i = 0; i < board_list.size() ; i++){
-
-//				Board newBoard = new Board();
-
-                Board board = board_list.get(i);
-
-                List<BoardNumber> list  = new ArrayList<BoardNumber>();
-                list.add(new BoardNumber(14, false));
-                list.add(new BoardNumber(21, false));
-                list.add(new BoardNumber(17, false));
-                list.add(new BoardNumber(24, false));
-                list.add(new BoardNumber(4, false));
-
-                Row row1 = new Row(list);
-                row1.setBoard(board);
-
-
-                list = new ArrayList<BoardNumber>();
-                list.add(new BoardNumber(10, false));
-                list.add(new BoardNumber(16, false));
-                list.add(new BoardNumber(15, false));
-                list.add(new BoardNumber(9, false));
-                list.add(new BoardNumber(19, false));
-
-                Row row2 = new Row(list);
-                row2.setBoard(board);
-
-
-                list = new ArrayList<BoardNumber>();
-                list.add(new BoardNumber(18, false));
-                list.add(new BoardNumber(8, false));
-                list.add(new BoardNumber(23, false));
-                list.add(new BoardNumber(26, false));
-                list.add(new BoardNumber(20, false));
-
-                Row row3 = new Row(list);
-                row3.setBoard(board);
-
-                list = new ArrayList<BoardNumber>();
-                list.add(new BoardNumber(22, false));
-                list.add(new BoardNumber(11, false));
-                list.add(new BoardNumber(13, false));
-                list.add(new BoardNumber(6, false));
-                list.add(new BoardNumber(5, false));
-
-                Row row4 = new Row(list);
-                row4.setBoard(board);
-
-                list = new ArrayList<BoardNumber>();
-                list.add(new BoardNumber(2, false));
-                list.add(new BoardNumber(0, false));
-                list.add(new BoardNumber(12, false));
-                list.add(new BoardNumber(3, false));
-                list.add(new BoardNumber(7, false));
-
-                Row row5 = new Row(list);
-                row5.setBoard(board);
-
-
-                // add rows to the board
-                List<Row> rowList = new ArrayList<Row>();
-                rowList.add(row1);
-                rowList.add(row2);
-                rowList.add(row3);
-                rowList.add(row4);
-                rowList.add(row5);
-
-//				newBoard.setRowList(rowList);
-
-                board.setRowList(rowList);
-
-            }
-
-        }
-    }
-
-
 
 
     static boolean markBoardNumber(int number, List<Board> board_list){
@@ -418,8 +101,6 @@ public class Bingo {
 
             for(BoardNumber entry : BoardNumberList){
 
-//				System.out.println("entry= " + entry.getNumber() + ", marked= " + entry.getMarked());
-
                 if(!entry.getMarked()){
                     continue rowLoop;
                 }
@@ -436,7 +117,7 @@ public class Bingo {
 
     static void printBoard(Board board){
 
-//		for(Board board:board_list){
+//		for(domain.Board board:board_list){
 
         List<Row> rowList = board.getRowList();
         for(Row row:rowList){
@@ -487,9 +168,9 @@ public class Bingo {
 
             while(true){
 
-                if(draw_numbers.size() > 0){
+                if(bingo.draw_numbers.size() > 0){
 
-                    System.out.println("Pick one number: " + draw_numbers);
+                    System.out.println("Pick one number: " + bingo.draw_numbers);
 
                     String s = scanner.nextLine();
 
@@ -501,15 +182,15 @@ public class Bingo {
                         continue;
                     }
 
-                    if(draw_numbers.contains(chosenNumber)){
+                    if(bingo.draw_numbers.contains(chosenNumber)){
 
-                        if(markBoardNumber(chosenNumber, board_list)){
+                        if(markBoardNumber(chosenNumber, bingo.board_list)){
 
-                            draw_numbers.remove(chosenNumber);
+                            bingo.draw_numbers.remove(chosenNumber);
 
                             boolean isBingo = false;
 
-                            for(Board board:board_list){
+                            for(Board board:bingo.board_list){
 
                                 if(checkHorizontal(board) || checkVertical(board) ){
                                     isBingo = true;
@@ -538,8 +219,6 @@ public class Bingo {
         }
 
     }
-
-
 
 }
 
