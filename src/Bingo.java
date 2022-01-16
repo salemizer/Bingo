@@ -1,14 +1,20 @@
 import domain.Board;
 import domain.BoardNumber;
 import domain.Row;
+import generator.BoardGenerator;
+import generator.DrawNumberGenerator;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 
 public class Bingo {
 
-     List<Integer> draw_numbers = null;
-     List<Board> board_list = null;
+    private List<Integer> draw_numbers = null;
+    private List<Integer> marked_numbers = null;
+
+    private List<Board> board_list = null;
 
 
     public Bingo(){
@@ -67,7 +73,7 @@ public class Bingo {
 
             for(BoardNumber entry : BoardNumberList){
 
-                if(!entry.getMarked()){
+                if(!entry.isMarked()){
                     continue rowLoop;
                 }
             }
@@ -97,7 +103,7 @@ public class Bingo {
                 List <BoardNumber> entries =  row.getBoardNumberList();
                 BoardNumber entry = entries.get(c);
 
-                if(!entry.getMarked()){
+                if(!entry.isMarked()){
                     continue columnLoop;
                 }
             }
@@ -110,9 +116,26 @@ public class Bingo {
 
 
 
+    private int calculateScore(Board board, int lastDrawnNumber){
+
+        int sum = 0;
+
+         for(Row row : board.getRowList()){
+             for(BoardNumber number : row.getBoardNumberList()){
+                 if( ! number.isMarked()){
+                      sum += number.getNumber();
+                 }
+             }
+         }
+         return sum * lastDrawnNumber;
+    }
+
+
     public static void main(String [] args){
 
         Bingo bingo = new Bingo();
+
+        bingo.marked_numbers = new ArrayList<Integer>();
 
         Scanner scanner = new Scanner(System.in);
 
@@ -126,19 +149,21 @@ public class Bingo {
 
                     String s = scanner.nextLine();
 
-                    Integer chosenNumber = null;
+                    Integer drawnNumber = null;
 
                     if(s.length() > 0 && Character.isDigit(s.charAt(0))){
-                        chosenNumber =  Integer.valueOf(s);
+                        drawnNumber =  Integer.valueOf(s);
                     }else{
                         continue;
                     }
 
-                    if(bingo.draw_numbers.contains(chosenNumber)){
+                    if(bingo.draw_numbers.contains(drawnNumber)){
 
-                        if(bingo.markBoardNumber(chosenNumber, bingo.board_list)){
+                        if(bingo.markBoardNumber(drawnNumber, bingo.board_list)){
 
-                            bingo.draw_numbers.remove(chosenNumber);
+                            bingo.draw_numbers.remove(drawnNumber);
+
+                         //   bingo.marked_numbers.add(chosenNumber);
 
                             boolean isBingo = false;
 
@@ -146,8 +171,9 @@ public class Bingo {
 
                                 if(bingo.checkHorizontal(board) || bingo.checkVertical(board) ){
                                     isBingo = true;
-                                    System.out.println("Board " + board.getBoardId() +  " BINGOOOOOOOO !!");
-
+                                    System.err.println(" BINGOOOOOOOOOOOOOOOOOOOO !! \n");
+//                                    System.out.println("Numbers= " + bingo.marked_numbers + "\n");
+                                    System.err.println("Board " + board.getBoardId() + " Score= " + bingo.calculateScore(board, drawnNumber) + "\n");
                                 }
                             }
 

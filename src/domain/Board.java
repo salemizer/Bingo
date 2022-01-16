@@ -3,8 +3,6 @@ package domain;
 import java.util.ArrayList;
 import java.util.List;
 
-
-
 public class Board {
 
     private String boardId;
@@ -45,4 +43,19 @@ public class Board {
     }
 
 
+    public boolean equals(Object obj){
+
+        if(obj instanceof Board){
+
+            Board board = (Board) obj;
+            if(board.getBoardId().equals(this.getBoardId()) && board.getRowList().equals(this.getRowList())){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public int hasCode(){
+        return 0;
+    }
 }

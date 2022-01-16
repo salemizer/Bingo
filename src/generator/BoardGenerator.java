@@ -1,3 +1,5 @@
+package generator;
+
 import domain.Board;
 import domain.BoardNumber;
 import domain.Row;

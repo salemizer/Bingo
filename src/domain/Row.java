@@ -42,4 +42,20 @@ public class Row {
 
         return this.boardNumberList.toString();
     }
+
+    public boolean equals(Object obj){
+
+        if(obj instanceof Row){
+
+            Row row = (Row) obj;
+            if(row.getBoardNumberList().equals(this.boardNumberList)){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public int hasCode(){
+        return 0;
+    }
 }
