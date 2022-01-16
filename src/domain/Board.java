@@ -48,7 +48,7 @@ public class Board {
         if(obj instanceof Board){
 
             Board board = (Board) obj;
-            if(board.getBoardId().equals(this.getBoardId()) && board.getRowList().equals(this.getRowList())){
+            if(board.getRowList().equals(this.getRowList())){
                 return true;
             }
         }

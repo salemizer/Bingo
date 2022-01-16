@@ -47,7 +47,7 @@ public class BoardNumber {
         if(obj instanceof BoardNumber){
 
             BoardNumber boardNumber = (BoardNumber) obj;
-            if(boardNumber.getNumber().equals(this.getNumber()) && boardNumber.getRow().equals(this.getRow())){
+            if(boardNumber.getNumber().equals(this.getNumber())){
                 return true;
             }
         }
